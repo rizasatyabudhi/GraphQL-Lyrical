@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import { Link } from "react-router";
+import query from "../queries/fetchSongs";
+
 class SongList extends Component {
   renderSongs() {
+    // this.props.data = to access the returned value from the GraphQL Query
     return this.props.data.songs.map((value, index) => {
       return (
         <li className="collection-item" key={index}>
@@ -27,12 +30,12 @@ class SongList extends Component {
   }
 }
 
-const query = gql`
-  {
-    songs {
-      title
+const mutation = gql`
+  mutation DeleteSong($id: ID) {
+    deleteSong(id: $id) {
+      id
     }
   }
 `;
 
-export default graphql(query)(SongList);
+export default graphql(mutation)(graphql(query)(SongList));
