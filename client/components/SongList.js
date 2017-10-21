@@ -13,15 +13,15 @@ class SongList extends Component {
 
   renderSongs() {
     // this.props.data = to access the returned value from the GraphQL Query
-    return this.props.data.songs.map((value, index) => {
+    return this.props.data.songs.map(({ id, title }) => {
       return (
-        <li className="collection-item" key={value.id}>
-          {value.title}
+        <li className="collection-item" key={id}>
+          <Link to={`/songs/${id}`}>{title}</Link>
           <i
             className="material-icons"
             onClick={() => {
-              this.onSongDelete(value.id);
-              console.log(value.id);
+              this.onSongDelete(id);
+              console.log(id);
             }}
           >
             delete
