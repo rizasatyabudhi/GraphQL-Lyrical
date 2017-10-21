@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class LyricList extends Component {
+  onLike(id) {
+    console.log(id);
+  }
+
   render() {
     return (
       <div>
@@ -9,6 +13,9 @@ class LyricList extends Component {
             return (
               <li className="collection-item" key={id}>
                 {content}
+                <i onClick={() => this.onLike(id)} className="material-icons">
+                  thumb_up
+                </i>
               </li>
             );
           })}

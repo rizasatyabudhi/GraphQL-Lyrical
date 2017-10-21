@@ -10,14 +10,13 @@ class LyricCreate extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props
-      .mutate({
-        variables: {
-          content: this.state.content,
-          songId: this.props.songId
-        }
-      })
-      .then(() => this.setState({ content: "" }));
+    this.props.mutate({
+      variables: {
+        content: this.state.content,
+        songId: this.props.songId
+      }
+    });
+    this.setState({ content: "" });
   }
 
   render() {
@@ -35,10 +34,11 @@ class LyricCreate extends Component {
 }
 
 const mutation = gql`
-  mutation addLyric($id: ID, $content: String) {
+  mutation addLyric($content: String, $id: ID) {
     addLyricToSong(content: $content, songId: $id) {
       id
       lyrics {
+        id
         content
       }
     }
